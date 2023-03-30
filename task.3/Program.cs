@@ -2,39 +2,30 @@
 
 // [3, 7.4, 22.3, 2, 78] -> 76
 
-// double a = ReadInt("Введите размерность массива -> ");
-// double b = ReadInt("Введите минимальное значение массива -> ");
-// double c = ReadInt("Введите максимальное значение массива -> ");
+double[] doubleArray = GetRandomArray(6, 0, 99);
+Console.WriteLine($"[{String.Join(" ", doubleArray)}]");
 
-double[] array = GetRandomArray(3, 23.4 , 85.5);
-Console.WriteLine($"[{String.Join(",", array)}]");
-// Console.WriteLine($"Cумма отрицательных индексов в массиве - > {FindElement(array)}");
+Console.WriteLine(GetResultDiff(doubleArray));
 
+double GetResultDiff(double[] array)
+{
+    double min = array[0];
+    double max = array[0];
+    foreach (var item in array)
+    {
+        if(min > item) min = item;
+        if(max < item) max = item;
+    }
+    return max - min;
+}
+//------------------общий метод---------------------
 
-// int FindElement(double[] array)
-// {
-//     double summ = 0;
-//     for (int count = 1; count < array.Length; count += 2)
-//     {
-//         summ = summ + array[count];
-//     }
-//     return summ;
-// }
-
-// -------------------------------Общий метод-------------------------------------------
-// int ReadInt(string text)
-// {
-//     Console.Write(text);
-//     return Convert.ToInt32(Console.ReadLine());
-// }
-
-// -------------------------------Общий метод-------------------------------------------
-double[] GetRandomArray(double size, double minValue, double maxValue)
+double[] GetRandomArray(int size, int minValue, int maxValue)
 {
     double[] result = new double[size];
     for (int i = 0; i < size; i++)
     {
-        result[i] = new Random().NextDouble(minValue, maxValue);
+        result[i] = Math.Round(new Random().NextDouble() + new Random().Next( maxValue - minValue), 2);
     }
 
     return result;
